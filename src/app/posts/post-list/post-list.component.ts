@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
 @Component({
@@ -7,9 +7,10 @@ import { Title } from '@angular/platform-browser';
   styles: ['./post-list.component.css']
 })
 export class PostListComponent {
-  posts = [
-    { title: 'First Pst', content: 'Content of first post' },
-    { title: 'Fecond Pst', content: 'Content of second post' },
-    { title: 'Third title', content: 'Content of third post' }
-  ];
+  @Input() posts = [];
+  // posts = [
+  //   { title: 'First Post', content: 'Content of first post' },
+  //   { title: 'Second Post', content: 'Content of second post' },
+  //   { title: 'Third Post', content: 'Content of third post' }
+  // ];
 }
