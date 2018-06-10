@@ -13,6 +13,7 @@ if (!directory) return
 // check if directory exists
 if (!fs.existsSync(directory)) return
 
+// check if url is given
 if (!userUrl) return
 
 const uri = url.parse(userUrl)
@@ -22,5 +23,6 @@ let req = http.request(options, function(r) {
     console.log(JSON.stringify(r.headers))
 })
 req.end()
-// https://www.wallashops.co.il/ 
+// node index.js
+// https://www.wallashops.co.il/
 // c:/users/yuo/"working space"/my-messages
