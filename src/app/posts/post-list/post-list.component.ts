@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Post } from '../post.model';
+import { PostService } from '../post.service';
 
 @Component({
   selector: 'app-post-list',
@@ -14,4 +15,6 @@ export class PostListComponent {
   //   { title: 'Second Post', content: 'Content of second post' },
   //   { title: 'Third Post', content: 'Content of third post' }
   // ];
+
+  constructor(public postService: PostService) {}
 }
