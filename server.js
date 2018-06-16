@@ -1,6 +1,6 @@
 const http = require('http')
 const debug = require('debug')('node-angular')
-const app = require('./sever/app')
+const app = require('./server/app')
 
 // functions
 const normalizedPort = val => {
@@ -37,7 +37,7 @@ const onError = error => {
 const onListening = () => {
   const addr = server.address
   const bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + port
-  degub('listen on: ' + bind)
+  debug('listen on: ' + bind)
 }
 
 // script
