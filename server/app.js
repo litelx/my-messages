@@ -1,7 +1,19 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const mongoose = require('mongoose')
+const Post = require('./models/post')
 
 const app = express()
+
+// mongoose.connect('mongodb://litel:0UWvK3vuJFTHXc7A@cluster0-shard-00-00-hpih8.mongodb.net:27017,cluster0-shard-00-01-hpih8.mongodb.net:27017,cluster0-shard-00-02-hpih8.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true')
+mongoose.connect('mongodb+srv://litel:0UWvK3vuJFTHXc7A@cluster0-hpih8.mongodb.net/node-angular?retryWrites=true')
+  .then(() => {
+    console.log('connected to database!')
+  })
+  .catch(() => {
+    console.log('connection failed!')
+  })
+// 0UWvK3vuJFTHXc7A
 
 app.use(bodyParser.json())
 
@@ -13,7 +25,12 @@ app.use((req, res, next) => {
 })
 
 app.post('/api/posts', (req, res, next) => {
-  const post = req.body
+  const post = new Post({
+    title: req.body.title,
+    content: req.body.content
+  })
+  post.save()
+
   console.log('post added! ', post)
   res.status(201).json({
     message: 'Post added successfully!'
@@ -21,22 +38,13 @@ app.post('/api/posts', (req, res, next) => {
 })
 
 app.get('/api/posts', (req, res, next) => {
-  let posts = [
-    {
-      id: 'm5948v67',
-      title: 'First post title',
-      content: 'Content of first post'
-    },
-    {
-      id: '487fh6fd',
-      title: 'Second title',
-      content: 'Content of second content'
-    }
-  ];
-  res.status(200).json({
-    message: 'Posts fetched succesfully!',
-    posts: posts
-  });
-});
+  Post.find()
+  .then(documents => {
+    res.status(200).json({
+      message: 'Posts fetched succesfully!',
+      posts: documents
+    })
+  })
+})
 
 module.exports = app;
