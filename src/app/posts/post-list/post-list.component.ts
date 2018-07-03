@@ -13,20 +13,38 @@ export class PostListComponent implements OnInit, OnDestroy {
   posts: Post[] = [];
   private postSub: Subscription;
   // posts = [
-    // { title: 'First Post', content: 'Content of first post' },
-    // { title: 'Second Post', content: 'Content of second post' },
-    // { title: 'Third Post', content: 'Content of third post' }
+  // { title: 'First Post', content: 'Content of first post' },
+  // { title: 'Second Post', content: 'Content of second post' },
+  // { title: 'Third Post', content: 'Content of third post' }
   // ];
 
   constructor(public postService: PostService) {}
 
   ngOnInit() {
+    /*
+    const token = '""" is klmist lkcispc lm "is kfjdf"';
+    const s = 'is';
 
+    const arr = token.split('"');
+    let count = 0;
+    for (let i = 0; i < arr.length; i = i + 2) {
+      count += arr[i].split(s).length - 1;
+    }
+    console.log(count);
+  */
+    // let passed = 3;
+    // function addTo() {
+    //   let inner = 2;
+    //   return inner + passed;
+    // }
+    // let passed = 4;
+    // console.dir(addTo);
+    // console.log(addTo);
     this.postService.getPosts();
     this.postSub = this.postService.getPostUpdateListener()
-    .subscribe((posts: Post[]) => {
-      this.posts = posts;
-    });
+      .subscribe((posts: Post[]) => {
+        this.posts = posts;
+      });
   }
 
   ngOnDestroy() {
@@ -34,7 +52,7 @@ export class PostListComponent implements OnInit, OnDestroy {
   }
 
   onDelete(id: string) {
-    console.log('deleting message', id);
+    console.log('Deleting message', id);
     this.postService.deletePost(id);
-    }
+  }
 }
