@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs';
 export class PostListComponent implements OnInit, OnDestroy {
 
   posts: Post[] = [];
+  isLoading = false;
   private postSub: Subscription;
   // posts = [
   // { title: 'First Post', content: 'Content of first post' },
@@ -40,9 +41,11 @@ export class PostListComponent implements OnInit, OnDestroy {
     // let passed = 4;
     // console.dir(addTo);
     // console.log(addTo);
+    this.isLoading = true;
     this.postService.getPosts();
     this.postSub = this.postService.getPostUpdateListener()
       .subscribe((posts: Post[]) => {
+        this.isLoading = false;
         this.posts = posts;
       });
   }
@@ -53,6 +56,8 @@ export class PostListComponent implements OnInit, OnDestroy {
 
   onDelete(id: string) {
     console.log('Deleting message', id);
+    this.isLoading = true;
     this.postService.deletePost(id);
+    this.isLoading = false;
   }
 }
