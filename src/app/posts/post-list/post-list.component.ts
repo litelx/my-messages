@@ -13,11 +13,6 @@ export class PostListComponent implements OnInit, OnDestroy {
   posts: Post[] = [];
   isLoading = false;
   private postSub: Subscription;
-  // posts = [
-  // { title: 'First Post', content: 'Content of first post' },
-  // { title: 'Second Post', content: 'Content of second post' },
-  // { title: 'Third Post', content: 'Content of third post' }
-  // ];
 
   constructor(public postService: PostService) {}
 
@@ -33,15 +28,8 @@ export class PostListComponent implements OnInit, OnDestroy {
     }
     console.log(count);
   */
-    // let passed = 3;
-    // function addTo() {
-    //   let inner = 2;
-    //   return inner + passed;
-    // }
-    // let passed = 4;
-    // console.dir(addTo);
-    // console.log(addTo);
-    this.isLoading = true;
+
+  this.isLoading = true;
     this.postService.getPosts();
     this.postSub = this.postService.getPostUpdateListener()
       .subscribe((posts: Post[]) => {
